@@ -38,6 +38,21 @@ userSchema.statics.getUsers = async function () {
   }
 }
 
+userSchema.statics.updateUser = async function (email, newEmail) {
+  try {
+    const filter = { email };
+    const update = { email: newEmail };
+
+// `doc` is the document _after_ `update` was applied because of
+    // `new: true`
+    const user = await this.findOneAndUpdate(filter, update, {
+      new: true
+    });
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
 /**
  * @param {Array} ids, string of user ids
  * @return {Array of Objects} users list

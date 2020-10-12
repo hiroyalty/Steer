@@ -11,6 +11,15 @@ module.exports.onGetAllUsers = async (req, res) => {
     }
   };
 
+module.exports.updateUser = async(req, res) => {
+  try{
+    const user = await UserModel.updateUser(req.body.email, req.body.newEmail);
+    return res.status(200).json({sucess:true, user})
+  } catch (error) {
+    res.status(500).json({success: false, error: error})
+  }
+}
+
   module.exports.onGetUserById = async (req, res) => {
     try {
       const user = await UserModel.getUserById(req.params.id);
